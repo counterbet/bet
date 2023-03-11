@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Dark Webpage</title>
+	<style>
+		body {
+			background-color: #1c1c1c; /* dark background color */
+			color: #fff; /* text color */
+			font-family: Arial, sans-serif; /* font family */
+			margin: 0;
+		}
+		#header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 10px;
+		}
+		#login {
+			background-color: #2e2e2e; /* dark button color */
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+		#login:hover {
+			background-color: #444444; /* slightly lighter button color on hover */
+		}
+	</style>
+	<script src="https://cdn.steamcommunity.com/public/javascript/openidv2.js"></script>
+	<script>
+		SteamOpenID.init('D615F86B78B704B2EB00736B690B28CD', 'https://example.com/steam-authenticate');
+		
+		function steamLogin() {
+			SteamOpenID.redirectToSteamLogin();
+		}
+	</script>
+</head>
+<body>
+	<header id="header">
+		<!-- Logo or other content can be added here -->
+		<button id="login" onclick="steamLogin()">Log in with Steam</button>
+	</header>
+	<!-- Rest of webpage content goes here -->
+</body>
+</html>
