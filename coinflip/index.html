@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CounterBet - Premier CSGO Gambling</title>
+    <style>
+      body {
+        background-color: #171721;
+        color: #fff;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      #balance {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 20px;
+        color: green
+      }
+
+      #betAmount {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        background-color: #141421;
+        color: #ffffff;
+        border: none;
+      }
+
+      #input-field {
+        font-size: 20px;
+        height: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        background-color: #141421;
+        color: #ffffff;
+        border: none;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+      }
+
+      #coin {
+        background-image: url('coin.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 20px;
+      }
+
+      #coin.animate {
+        animation: flip 1s forwards;
+      }
+
+      #discord-button {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        background-color: #171721;
+        outline: none;
+        color: white
+      }
+
+      #coinflip-button {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        left: 1;
+        padding: 20px;
+        background-color: #171721;
+        outline: none;
+        color: white
+      }
+
+      @keyframes flip {
+        0% {
+          transform: rotateY(0deg);
+        }
+        50% {
+          transform: rotateY(180deg);
+        }
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+      button {
+        background-color: #e72d31;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #611414;
+        cursor: not-allowed;
+      }
+
+      .label{
+        color: black;
+        padding: 8px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="balance">$0.00</div>
+    <div id="coin"></div>
+
+    <label for="betAmount">Enter bet amount:</label>
+    <input type="number" id="betAmount" name="betAmount" min="1.00" step="1.00" value="1.00">
+    <input type="text" id="input-field" name="inputField" min="" step="" value="Enter Code">
+    <button id="flip">Flip coin</button>
+    <button id="discord-button">Discord</button>
+    <button id="coinflip-button">Coinlip</button>
+    
+    <audio id="coin-sound" src="coin-sound.mp3"></audio>
+    <script>
+        const balanceEl = document.getElementById('balance');
+        const coinEl = document.getElementById('coin');
+        const flipBtn = document.getElementById('flip');
+        const coinSound = document.getElementById('coin-sound');
+        const betAmountEl = document.getElementById('betAmount');
+        const inputField = document.getElementById('input-field');
+        const discordBtn = document.getElementById("discord-button");
+    
+        let balance = parseFloat(localStorage.getItem('siteBalance')) || 0;
+        balanceEl.textContent = `$${balance.toFixed(2)}`;
+    
+        if (localStorage.getItem('tiktokRedeemed')) {
+          inputField.disabled = true;
+        }
+
+        localStorage.setItem('siteBalance', balance);
+    
+        flipBtn.addEventListener('click', () => {
+        const betAmount = parseFloat(betAmountEl.value);
+        if (balance >= betAmount) {
+            balance -= betAmount;
+            balanceEl.textContent = `$${balance.toFixed(2)}`;
+            coinEl.classList.add('animate');
+            flipBtn.disabled = true;
+            coinSound.play();
+            setTimeout(() => {
+            const result = Math.random() < 0.50;
+            if (result) {
+                balance += betAmount * 2;
+                balanceEl.textContent = `$${balance.toFixed(2)}`;
+                alert(`Congratulations, you won $${betAmount * 2}!`);
+                } else {
+                    alert(`Unlucky, you lost $${betAmount}!`);
+                }
+                    coinEl.classList.remove('animate');
+                    flipBtn.disabled = false;
+                    localStorage.setItem('siteBalance', balance);
+                }, 1000);
+            } else {
+                alert('Not enough balance, deposit more!');
+            }
+        });
+    
+        if (localStorage.getItem('inputFieldDisabled') === 'true') {
+          inputField.disabled = true;
+        }
+    
+        inputField.addEventListener('input', function() {
+          if (inputField.value.includes('tiktok')) {
+            balance += 0.50;
+            balanceEl.textContent = `$${balance.toFixed(2)}`;
+            inputField.disabled = true;
+            localStorage.setItem('inputFieldDisabled', true);
+          }
+
+          if (inputField.value.includes('281003741903')) {
+            balance += 5;
+            balanceEl.textContent = `$${balance.toFixed(2)}`;
+            inputField.disabled = true;
+            localStorage.setItem('inputFieldDisabled', true);
+          }
+        });
+
+        discordBtn.addEventListener('click', () => {
+            window.location.href = 'https://discord.gg/hAPFtjUWNh';
+        });
+
+        coinflipBtn.addEventListener('click', () => {
+            window.location.href = 'https://discord.gg/hAPFtjUWNh';
+        });
+      </script>
