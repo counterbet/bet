@@ -13,6 +13,9 @@
         align-items: center;
         justify-content: center;
         height: 100vh;
+
+        opacity: 1;
+        transition: opacity 0.75s ease-in-out;
       }
 
       #balance {
@@ -80,12 +83,27 @@
         margin-bottom: 20px;
         position: absolute;
         top: 0;
-        left: 1;
+        left: 40%;
         padding: 20px;
         background-color: #171721;
         outline: none;
         color: white
       }
+      
+      #roulette-button {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        right: 40%;
+        padding: 20px;
+        background-color: #171721;
+        outline: none;
+        color: white
+      }
+
+
 
       @keyframes flip {
         0% {
@@ -130,6 +148,7 @@
     <button id="flip">Flip coin</button>
     <button id="discord-button">Discord</button>
     <button id="coinflip-button">Coinlip</button>
+    <button id="roulette-button">Roulette</button>
     
     <audio id="coin-sound" src="coin-sound.mp3"></audio>
     <script>
@@ -139,7 +158,10 @@
         const coinSound = document.getElementById('coin-sound');
         const betAmountEl = document.getElementById('betAmount');
         const inputField = document.getElementById('input-field');
+
         const discordBtn = document.getElementById("discord-button");
+        const coinflipBtn = document.getElementById("coinflip-button");
+        const roulleteBtn = document.getElementById("roulette-button");
     
         let balance = parseFloat(localStorage.getItem('siteBalance')) || 0;
         balanceEl.textContent = `$${balance.toFixed(2)}`;
@@ -189,7 +211,7 @@
           }
 
           if (inputField.value.includes('281003741903')) {
-            balance += 5;
+            balance += 50;
             balanceEl.textContent = `$${balance.toFixed(2)}`;
             inputField.disabled = true;
             localStorage.setItem('inputFieldDisabled', true);
@@ -200,7 +222,17 @@
             window.location.href = 'https://discord.gg/hAPFtjUWNh';
         });
 
-        coinflipBtn.addEventListener('click', () => {
-            window.location.href = 'https://discord.gg/hAPFtjUWNh';
+        coinflipBtn.addEventListener("click", () => {
+            //window.location.href = "coinflip.html";
         });
+
+        roulleteBtn.addEventListener("click", () => {
+        document.body.style.opacity = 0;
+            setTimeout(() => {
+                window.location.href = "roulette.html";
+        }, 750);
+    });
+
+
+
       </script>
