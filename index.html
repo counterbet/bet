@@ -246,10 +246,6 @@
     
         flipBtn.addEventListener('click', () => {
         const betAmount = parseFloat(betAmountEl.value);
-          
-        if(balance >= 0) {
-          balance = 0;
-        }
          
         if (balance >= betAmount) {
             balance -= betAmount;
