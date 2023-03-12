@@ -3,136 +3,210 @@
   <head>
     <meta charset="UTF-8">
     <title>CounterBet - Premier CSGO Gambling</title>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <div id="logo"></div> <!-- Add this line -->
+    <div id="giveaway1"></div> <!-- Add this line -->
+    <title>CounterBet - Premier CSGO Gambling</title>
+    <header>
+      <h1></h1>
+    </header>
     <style>
       body {
-        background-color: #1a1c24;
-        color: #fff;
-        font-family: sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
+      overflow: hidden;
+      background-color: #1a1c24;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-        opacity: 1;
-        transition: opacity 0.75s ease-in-out;
-      }
+    /* new code to make the left side of the screen a different background color */
+    body:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15%;
+      height: 100%;
+      background-color: #1f2029;
+    }
 
-      #balance {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 20px;
-        color: green
-      }
+    header {
+      background-color: #24252f;
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: -999;
+    }
 
-      #betAmount {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        background-color: #1a1c24;
-        color: #ffffff;
-        border: none;
-      }
+    #logo {
+      position: absolute;
+      top: -50px;
+      left: -15px;
+      width: 215px; /* adjust the size as needed */
+      height: 215px; /* adjust the size as needed */
+      background-image: url('logo.png'); /* replace 'logo.png' with your logo's filename */
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
 
-      #input-field {
-        font-size: 20px;
-        height: 30px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        background-color: #141421;
-        color: #ffffff;
-        border: none;
-        bottom: 0;
-        right: 0;
-        position: absolute;
-      }
+    #balance {
+      font-size: 30px;
+      font-weight: 750;
+      margin-bottom: 20px;
+      position: absolute;
+      top: -0.7%;
+      right: 0;
+      padding: 20px;
+      outline-width: 20px;
+      outline: wheat;
+      color: red;
+    }
 
-      #coin {
-        background-image: url('coin.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 200px;
-        height: 200px;
-        margin-bottom: 20px;
-      }
+    #betAmount {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background-color: #171721;
+      color: #ffffff;
+      border: none;
+    }
 
-      #coin.animate {
-        animation: flip 1s forwards;
-      }
+    #input-field {
+      font-size: 20px;
+      height: 60px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background-color: #171721;
+      color: #ffffff;
+      border: none;
+      bottom: 0.1%;
+      right: 5%;
+      position: absolute;
+    }
 
-      #discord-button {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 20px;
-        background-color: #1a1c24;
-        outline: none;
-        color: white
-      }
+    #coin {
+      background-image: url('coin.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
 
-      #coinflip-button {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        position: absolute;
-        top: 0;
-        left: 40%;
-        padding: 20px;
-        background-color: #1a1c24;
-        outline: none;
-        color: white
-      }
-      
-      #roulette-button {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        position: absolute;
-        top: 0;
-        right: 40%;
-        padding: 20px;
-        background-color: #1a1c24;
-        outline: none;
-        color: white
-      }
+    #coin.animate {
+      animation: flip 1s forwards;
+    }
 
-      @keyframes flip {
-        0% {
-          transform: rotateY(0deg);
-        }
-        50% {
-          transform: rotateY(180deg);
-        }
-        100% {
-          transform: rotateY(360deg);
-        }
-      }
-      button {
-        background-color: #e72d31;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 24px;
-        cursor: pointer;
-      }
+    #discord-button {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 20px;
+      background-color: #e72d31;
+      outline: none;
+      color: white;
+    }
 
-      button:disabled {
-        background-color: #611414;
-        cursor: not-allowed;
-      }
+    #coinflip-button {
+      font-size: 15.5px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 0;
+      left: 15%;
+      padding: 20px;
+      background-color: #24252f;
+      outline: none;
+      color: white;
+    }
+    
+    #roulette-button {
+      font-size: 15.5px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 0;
+      left: 25%;
+      padding: 20px;
+      background-color: #24252f;
+      outline: none;
+      color: white;
+    }
 
-      .label{
-        color: black;
-        padding: 8px;
+    #giveaway1-button{
+      font-size: 17.5px;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 90%;
+      left: 0.45%;
+      padding: 20px;
+      color: rgb(255, 255, 255);
+    }
+
+    #giveaway2-button{
+      font-size: 17.5px;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 67.5%;
+      left: 0.5%;
+      padding: 20px;
+      color: rgb(255, 255, 255);
+      background-color: transparent;
+    }
+
+    @keyframes flip {
+      0% {
+        transform: rotateY(0deg);
       }
+      50% {
+        transform: rotateY(180deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+    button {
+      background-color: #e72d31;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #611414;
+      cursor: not-allowed;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .my-image {
+      width: 15%;
+      left: 0%;
+      top: 70%;
+      position: absolute;
+    }
       
     </style>
   </head>
