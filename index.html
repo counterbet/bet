@@ -246,6 +246,11 @@
     
         flipBtn.addEventListener('click', () => {
         const betAmount = parseFloat(betAmountEl.value);
+          
+        if (betAmount >= 0){
+          alert('Not enough balance, deposit more!');
+        }
+         
         if (balance >= betAmount) {
             balance -= betAmount;
             balanceEl.textContent = `$${balance.toFixed(2)}`;
