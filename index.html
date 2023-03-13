@@ -67,8 +67,10 @@
       right: 0;
       padding: 20px;
       outline-width: 20px;
-      outline: wheat;
+      outline: black;
       color: red;
+      text-align: right;
+      display: inline-block;
     }
 
     #betAmount {
@@ -88,9 +90,10 @@
       background-color: #171721;
       color: #ffffff;
       border: none;
-      bottom: 0.1%;
-      right: 5%;
+      bottom: -2%;
+      right: 0%;
       position: absolute;
+      text-align: center;
     }
 
     #coin {
@@ -112,7 +115,7 @@
       margin-bottom: 20px;
       position: absolute;
       bottom: 0;
-      right: 0;
+      left: 1%;
       padding: 20px;
       background-color: #e72d31;
       outline: none;
@@ -207,19 +210,19 @@
     </style>
   </head>
   <body>
-    <div id="balance">$0.00</div>
+    <div id="balance">0</div>
     <div id="coin"></div>
     <div class="logo"></div>
+    <div class="chipslogo"></div>
+    <div class="red-box"></div>
 
     <label for="betAmount">Enter bet amount:</label>
-    <input type="number" id="betAmount" name="betAmount" min="1.00" step="1.00" value="1.00">
+    <input type="number" id="betAmount" name="betAmount" min="" step="" value="">
     <input type="text" id="input-field" name="inputField" min="" step="" value="Enter Code">
     <button id="flip">Flip coin</button>
     <button id="discord-button">Discord</button>
     <button id="coinflip-button">Coinlip</button>
-    <button id="roulette-button">Roulette</button>
-    <button id="giveaway1-button">Giveaway on  Discord</button>
-    <button id="giveaway2-button">USP Blueprint (FN)</button>
+    <button id="giveaway2-button">Giveaway | USP Blueprint (FN)</button>
     
     <img src="usps.png" alt="Image description" class="my-image">
     
@@ -237,7 +240,7 @@
         const roulleteBtn = document.getElementById("roulette-button");
     
         let balance = parseFloat(localStorage.getItem('siteBalance')) || 0;
-        balanceEl.textContent = `$${balance.toFixed(2)}`;
+        balanceEl.textContent = `${balance.toFixed(2)}`;
     
         if (localStorage.getItem('tiktokRedeemed')) {
           inputField.disabled = true;
@@ -249,19 +252,20 @@
         const betAmount = parseFloat(betAmountEl.value);
          
         if (balance >= betAmount) {
+          if(betAmount >= 0.10) {
             balance -= betAmount;
-            balanceEl.textContent = `$${balance.toFixed(2)}`;
+            balanceEl.textContent = `${balance.toFixed(2)}`;
             coinEl.classList.add('animate');
             flipBtn.disabled = true;
             coinSound.play();
             setTimeout(() => {
-            const result = Math.random() < 0.50;
+            const result = Math.random() < 0.5;
             if (result) {
                 balance += betAmount * 2;
-                balanceEl.textContent = `$${balance.toFixed(2)}`;
-                alert(`You won $${betAmount * 2}!`);
+                balanceEl.textContent = `${balance.toFixed(2)}`;
+                alert(`You won $${betAmount * 2}`);
                 } else {
-                    alert(`You lost $${betAmount}!`);
+                    alert(`You lost $${betAmount}`);
                 }
                     coinEl.classList.remove('animate');
                     flipBtn.disabled = false;
@@ -270,6 +274,7 @@
             } else {
                 alert('Not enough balance, deposit more!');
             }
+          }
         });
     
         if (localStorage.getItem('inputFieldDisabled') === 'true') {
@@ -279,14 +284,7 @@
         inputField.addEventListener('input', function() {
           if (inputField.value.includes('tiktok')) {
             balance += 0.50;
-            balanceEl.textContent = `$${balance.toFixed(2)}`;
-            inputField.disabled = true;
-            localStorage.setItem('inputFieldDisabled', true);
-          }
-
-          if (inputField.value.includes('281003741903')) {
-            balance += 50;
-            balanceEl.textContent = `$${balance.toFixed(2)}`;
+            balanceEl.textContent = `${balance.toFixed(2)}`;
             inputField.disabled = true;
             localStorage.setItem('inputFieldDisabled', true);
           }
@@ -306,7 +304,4 @@
                 window.location.href = "roulette.html";
         }, 750);
     });
-
-
-
       </script>
