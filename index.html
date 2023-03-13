@@ -122,6 +122,18 @@
       color: white;
     }
 
+    #deposit-withdraw-button{
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 0;
+      padding: 20px;
+      background-color: #e72d31;
+      outline: none;
+      color: white;
+    }
+
     #coinflip-button {
       font-size: 15.5px;
       font-weight: bold;
@@ -223,6 +235,8 @@
     <button id="discord-button">Discord</button>
     <button id="coinflip-button">Coinlip</button>
     <button id="giveaway2-button">Giveaway | USP Blueprint (FN)</button>
+
+    <button id="deposit-withdraw-button">Deposit / Withdraw</button>
     
     <img src="usps.png" alt="Image description" class="my-image">
     
@@ -238,6 +252,7 @@
         const discordBtn = document.getElementById("discord-button");
         const coinflipBtn = document.getElementById("coinflip-button");
         const roulleteBtn = document.getElementById("roulette-button");
+        const depositwithdrawBtn = document.getElementById("deposit-withdraw-button");
     
         let balance = parseFloat(localStorage.getItem('siteBalance')) || 0;
         balanceEl.textContent = `${balance.toFixed(2)}`;
@@ -291,6 +306,10 @@
         });
 
         discordBtn.addEventListener('click', () => {
+            window.location.href = 'https://discord.gg/hAPFtjUWNh';
+        });
+
+        depositwithdrawBtn.addEventListener('click', () => {
             window.location.href = 'https://discord.gg/hAPFtjUWNh';
         });
 
